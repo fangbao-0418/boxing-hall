@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUserAdvanceMapper">
+    
+    <resultMap type="SysUserAdvance" id="SysUserAdvanceResult">
+        <result property="id"    column="id"    />
+        <result property="userName"    column="userName"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="advanceState"    column="advanceState"    />
+        <result property="advanceTime"    column="advanceTime"    />
+        <result property="productId"    column="productId"    />
+    </resultMap>
+
+    <sql id="selectSysUserAdvanceVo">
+        select id, userName, mobile, advanceState, advanceTime, productId from sys_user_advance
+    </sql>
+
+    <select id="selectSysUserAdvanceList" parameterType="SysUserAdvance" resultMap="SysUserAdvanceResult">
+        <include refid="selectSysUserAdvanceVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and userName like concat('%', #{userName}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="advanceState != null "> and advanceState = #{advanceState}</if>
+            <if test="advanceTime != null "> and advanceTime = #{advanceTime}</if>
+            <if test="productId != null "> and productId = #{productId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysUserAdvanceById" parameterType="Long" resultMap="SysUserAdvanceResult">
+        <include refid="selectSysUserAdvanceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysUserAdvance" parameterType="SysUserAdvance" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user_advance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">userName,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="advanceState != null">advanceState,</if>
+            <if test="advanceTime != null">advanceTime,</if>
+            <if test="productId != null">productId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName != ''">#{userName},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="advanceState != null">#{advanceState},</if>
+            <if test="advanceTime != null">#{advanceTime},</if>
+            <if test="productId != null">#{productId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysUserAdvance" parameterType="SysUserAdvance">
+        update sys_user_advance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null and userName != ''">userName = #{userName},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="advanceState != null">advanceState = #{advanceState},</if>
+            <if test="advanceTime != null">advanceTime = #{advanceTime},</if>
+            <if test="productId != null">productId = #{productId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysUserAdvanceById" parameterType="Long">
+        delete from sys_user_advance where id = #{id}
+    </delete>
+
+    <delete id="deleteSysUserAdvanceByIds" parameterType="String">
+        delete from sys_user_advance where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

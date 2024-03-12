@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysTrainerMapper">
+    
+    <resultMap type="SysTrainer" id="SysTrainerResult">
+        <result property="id"    column="id"    />
+        <result property="trainer"    column="trainer"    />
+        <result property="grade"    column="grade"    />
+        <result property="comment"    column="comment"    />
+        <result property="status"    column="status"    />
+        <result property="weight"    column="weight"    />
+    </resultMap>
+
+    <sql id="selectSysTrainerVo">
+        select id, trainer, grade, comment, status, weight from sys_trainer
+    </sql>
+
+    <select id="selectSysTrainerList" parameterType="SysTrainer" resultMap="SysTrainerResult">
+        <include refid="selectSysTrainerVo"/>
+        <where>  
+            <if test="trainer != null  and trainer != ''"> and trainer = #{trainer}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysTrainerById" parameterType="Long" resultMap="SysTrainerResult">
+        <include refid="selectSysTrainerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysTrainer" parameterType="SysTrainer" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_trainer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trainer != null and trainer != ''">trainer,</if>
+            <if test="grade != null and grade != ''">grade,</if>
+            <if test="comment != null and comment != ''">comment,</if>
+            <if test="status != null">status,</if>
+            <if test="weight != null">weight,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trainer != null and trainer != ''">#{trainer},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+            <if test="comment != null and comment != ''">#{comment},</if>
+            <if test="status != null">#{status},</if>
+            <if test="weight != null">#{weight},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysTrainer" parameterType="SysTrainer">
+        update sys_trainer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="trainer != null and trainer != ''">trainer = #{trainer},</if>
+            <if test="grade != null and grade != ''">grade = #{grade},</if>
+            <if test="comment != null and comment != ''">comment = #{comment},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="weight != null">weight = #{weight},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysTrainerById" parameterType="Long">
+        delete from sys_trainer where id = #{id}
+    </delete>
+
+    <delete id="deleteSysTrainerByIds" parameterType="String">
+        delete from sys_trainer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
