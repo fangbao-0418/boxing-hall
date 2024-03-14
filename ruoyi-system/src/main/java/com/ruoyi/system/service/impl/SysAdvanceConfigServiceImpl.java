@@ -8,10 +8,10 @@ import com.ruoyi.system.domain.SysAdvanceConfig;
 import com.ruoyi.system.service.ISysAdvanceConfigService;
 
 /**
- * 预约配置Service业务层处理
+ * 预约管理Service业务层处理
  * 
  * @author ruoyi
- * @date 2024-03-11
+ * @date 2024-03-13
  */
 @Service
 public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService 
@@ -20,10 +20,10 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     private SysAdvanceConfigMapper sysAdvanceConfigMapper;
 
     /**
-     * 查询预约配置
+     * 查询预约管理
      * 
-     * @param id 预约配置主键
-     * @return 预约配置
+     * @param id 预约管理主键
+     * @return 预约管理
      */
     @Override
     public SysAdvanceConfig selectSysAdvanceConfigById(Long id)
@@ -32,10 +32,10 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     }
 
     /**
-     * 查询预约配置列表
+     * 查询预约管理列表
      * 
-     * @param sysAdvanceConfig 预约配置
-     * @return 预约配置
+     * @param sysAdvanceConfig 预约管理
+     * @return 预约管理
      */
     @Override
     public List<SysAdvanceConfig> selectSysAdvanceConfigList(SysAdvanceConfig sysAdvanceConfig)
@@ -44,9 +44,9 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     }
 
     /**
-     * 新增预约配置
+     * 新增预约管理
      * 
-     * @param sysAdvanceConfig 预约配置
+     * @param sysAdvanceConfig 预约管理
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     }
 
     /**
-     * 修改预约配置
+     * 修改预约管理
      * 
-     * @param sysAdvanceConfig 预约配置
+     * @param sysAdvanceConfig 预约管理
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     }
 
     /**
-     * 批量删除预约配置
+     * 批量删除预约管理
      * 
-     * @param ids 需要删除的预约配置主键
+     * @param ids 需要删除的预约管理主键
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class SysAdvanceConfigServiceImpl implements ISysAdvanceConfigService
     }
 
     /**
-     * 删除预约配置信息
+     * 删除预约管理信息
      * 
-     * @param id 预约配置主键
+     * @param id 预约管理主键
      * @return 结果
      */
     @Override

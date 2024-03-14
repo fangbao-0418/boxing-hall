@@ -22,22 +22,22 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 预约配置Controller
+ * 预约管理Controller
  * 
  * @author ruoyi
- * @date 2024-03-11
+ * @date 2024-03-13
  */
 @RestController
-@RequestMapping("/advance/config")
+@RequestMapping("/system/advanceConfig")
 public class SysAdvanceConfigController extends BaseController
 {
     @Autowired
     private ISysAdvanceConfigService sysAdvanceConfigService;
 
     /**
-     * 查询预约配置列表
+     * 查询预约管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:config:list')")
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysAdvanceConfig sysAdvanceConfig)
     {
@@ -47,22 +47,22 @@ public class SysAdvanceConfigController extends BaseController
     }
 
     /**
-     * 导出预约配置列表
+     * 导出预约管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:config:export')")
-    @Log(title = "预约配置", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:export')")
+    @Log(title = "预约管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysAdvanceConfig sysAdvanceConfig)
     {
         List<SysAdvanceConfig> list = sysAdvanceConfigService.selectSysAdvanceConfigList(sysAdvanceConfig);
         ExcelUtil<SysAdvanceConfig> util = new ExcelUtil<SysAdvanceConfig>(SysAdvanceConfig.class);
-        util.exportExcel(response, list, "预约配置数据");
+        util.exportExcel(response, list, "预约管理数据");
     }
 
     /**
-     * 获取预约配置详细信息
+     * 获取预约管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:config:query')")
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -70,10 +70,10 @@ public class SysAdvanceConfigController extends BaseController
     }
 
     /**
-     * 新增预约配置
+     * 新增预约管理
      */
-    @PreAuthorize("@ss.hasPermi('system:config:add')")
-    @Log(title = "预约配置", businessType = BusinessType.INSERT)
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:add')")
+    @Log(title = "预约管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SysAdvanceConfig sysAdvanceConfig)
     {
@@ -81,10 +81,10 @@ public class SysAdvanceConfigController extends BaseController
     }
 
     /**
-     * 修改预约配置
+     * 修改预约管理
      */
-    @PreAuthorize("@ss.hasPermi('system:config:edit')")
-    @Log(title = "预约配置", businessType = BusinessType.UPDATE)
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:edit')")
+    @Log(title = "预约管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SysAdvanceConfig sysAdvanceConfig)
     {
@@ -92,10 +92,10 @@ public class SysAdvanceConfigController extends BaseController
     }
 
     /**
-     * 删除预约配置
+     * 删除预约管理
      */
-    @PreAuthorize("@ss.hasPermi('system:config:remove')")
-    @Log(title = "预约配置", businessType = BusinessType.DELETE)
+    @PreAuthorize("@ss.hasPermi('system:advanceConfig:remove')")
+    @Log(title = "预约管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

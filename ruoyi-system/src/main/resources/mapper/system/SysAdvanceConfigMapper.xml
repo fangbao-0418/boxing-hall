@@ -12,37 +12,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
         <result property="times"    column="times"    />
         <result property="price"    column="price"    />
+        <result property="periods"    column="periods"    />
         <result property="instruction"    column="instruction"    />
-        <result property="gmtCreate"    column="gmt_create"    />
-        <result property="gmtModify"    column="gmt_modify"    />
-        <result property="lang"    column="lang"    />
-        <result property="description"    column="description"    />
-        <result property="status"    column="status"    />
-        <result property="isDefault"    column="is_default"    />
-        <result property="google"    column="google"    />
+        <result property="trainerId"    column="trainerId"    />
     </resultMap>
 
     <sql id="selectSysAdvanceConfigVo">
-        select id, title, weight, max_users_num, type, times, price, instruction, gmt_create, gmt_modify, lang, description, status, is_default, google from sys_advance_config
+        select id, title, weight, max_users_num, type, times, price, periods, instruction, trainerId from sys_advance_config
     </sql>
 
     <select id="selectSysAdvanceConfigList" parameterType="SysAdvanceConfig" resultMap="SysAdvanceConfigResult">
         <include refid="selectSysAdvanceConfigVo"/>
         <where>  
-            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
-            <if test="weight != null "> and weight = #{weight}</if>
-            <if test="maxUsersNum != null  and maxUsersNum != ''"> and max_users_num = #{maxUsersNum}</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="weight != null  and weight != ''"> and weight = #{weight}</if>
+            <if test="type != null "> and type = #{type}</if>
             <if test="times != null  and times != ''"> and times = #{times}</if>
-            <if test="price != null "> and price = #{price}</if>
+            <if test="periods != null  and periods != ''"> and periods = #{periods}</if>
             <if test="instruction != null  and instruction != ''"> and instruction = #{instruction}</if>
-            <if test="gmtCreate != null "> and gmt_create = #{gmtCreate}</if>
-            <if test="gmtModify != null "> and gmt_modify = #{gmtModify}</if>
-            <if test="lang != null  and lang != ''"> and lang = #{lang}</if>
-            <if test="description != null  and description != ''"> and description = #{description}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="isDefault != null "> and is_default = #{isDefault}</if>
-            <if test="google != null  and google != ''"> and google = #{google}</if>
+            <if test="trainerId != null "> and trainerId = #{trainerId}</if>
         </where>
     </select>
     
@@ -56,36 +44,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="title != null and title != ''">title,</if>
-            <if test="weight != null">weight,</if>
+            <if test="weight != null and weight != ''">weight,</if>
             <if test="maxUsersNum != null and maxUsersNum != ''">max_users_num,</if>
-            <if test="type != null and type != ''">type,</if>
+            <if test="type != null">type,</if>
             <if test="times != null and times != ''">times,</if>
             <if test="price != null">price,</if>
+            <if test="periods != null and periods != ''">periods,</if>
             <if test="instruction != null and instruction != ''">instruction,</if>
-            <if test="gmtCreate != null">gmt_create,</if>
-            <if test="gmtModify != null">gmt_modify,</if>
-            <if test="lang != null and lang != ''">lang,</if>
-            <if test="description != null and description != ''">description,</if>
-            <if test="status != null">status,</if>
-            <if test="isDefault != null">is_default,</if>
-            <if test="google != null and google != ''">google,</if>
+            <if test="trainerId != null">trainerId,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="title != null and title != ''">#{title},</if>
-            <if test="weight != null">#{weight},</if>
+            <if test="weight != null and weight != ''">#{weight},</if>
             <if test="maxUsersNum != null and maxUsersNum != ''">#{maxUsersNum},</if>
-            <if test="type != null and type != ''">#{type},</if>
+            <if test="type != null">#{type},</if>
             <if test="times != null and times != ''">#{times},</if>
             <if test="price != null">#{price},</if>
+            <if test="periods != null and periods != ''">#{periods},</if>
             <if test="instruction != null and instruction != ''">#{instruction},</if>
-            <if test="gmtCreate != null">#{gmtCreate},</if>
-            <if test="gmtModify != null">#{gmtModify},</if>
-            <if test="lang != null and lang != ''">#{lang},</if>
-            <if test="description != null and description != ''">#{description},</if>
-            <if test="status != null">#{status},</if>
-            <if test="isDefault != null">#{isDefault},</if>
-            <if test="google != null and google != ''">#{google},</if>
+            <if test="trainerId != null">#{trainerId},</if>
          </trim>
     </insert>
 
@@ -93,19 +71,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update sys_advance_config
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null and title != ''">title = #{title},</if>
-            <if test="weight != null">weight = #{weight},</if>
+            <if test="weight != null and weight != ''">weight = #{weight},</if>
             <if test="maxUsersNum != null and maxUsersNum != ''">max_users_num = #{maxUsersNum},</if>
-            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="type != null">type = #{type},</if>
             <if test="times != null and times != ''">times = #{times},</if>
             <if test="price != null">price = #{price},</if>
+            <if test="periods != null and periods != ''">periods = #{periods},</if>
             <if test="instruction != null and instruction != ''">instruction = #{instruction},</if>
-            <if test="gmtCreate != null">gmt_create = #{gmtCreate},</if>
-            <if test="gmtModify != null">gmt_modify = #{gmtModify},</if>
-            <if test="lang != null and lang != ''">lang = #{lang},</if>
-            <if test="description != null and description != ''">description = #{description},</if>
-            <if test="status != null">status = #{status},</if>
-            <if test="isDefault != null">is_default = #{isDefault},</if>
-            <if test="google != null and google != ''">google = #{google},</if>
+            <if test="trainerId != null">trainerId = #{trainerId},</if>
         </trim>
         where id = #{id}
     </update>
