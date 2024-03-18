@@ -53,12 +53,17 @@
             <artifactId>oshi-core</artifactId>
         </dependency>
 
+        <!-- 客户模块-->
+        <!-- <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-customer</artifactId>
+        </dependency> -->
+
         <!-- 系统模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-system</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>
