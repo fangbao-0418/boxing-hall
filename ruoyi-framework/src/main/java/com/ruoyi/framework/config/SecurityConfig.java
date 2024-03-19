@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
 import com.ruoyi.framework.config.properties.PermitAllUrlProperties;
+import com.ruoyi.framework.security.filter.JwtAuthenticationCustomerTokenFilter;
 import com.ruoyi.framework.security.filter.JwtAuthenticationTokenFilter;
 import com.ruoyi.framework.security.handle.AuthenticationEntryPointImpl;
 import com.ruoyi.framework.security.handle.LogoutSuccessHandlerImpl;
@@ -52,6 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private JwtAuthenticationTokenFilter authenticationTokenFilter;
     
+     /**
+     * token认证过滤器
+     */
+    @Autowired
+    private JwtAuthenticationCustomerTokenFilter authenticationCustomerTokenFilter;
+    
+
     /**
      * 跨域过滤器
      */
@@ -129,6 +137,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        // 添加JWT filter
+        httpSecurity.addFilterBefore(authenticationCustomerTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter
         httpSecurity.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
         httpSecurity.addFilterBefore(corsFilter, LogoutFilter.class);

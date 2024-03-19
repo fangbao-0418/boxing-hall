@@ -157,11 +157,11 @@
 
             
             <!-- 系统模块-->
-            <!-- <dependency>
+            <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-customer</artifactId>
                 <version>${ruoyi.version}</version>
-            </dependency> -->
+            </dependency>
 
             <!-- 通用工具-->
             <dependency>

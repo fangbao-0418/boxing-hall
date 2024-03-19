@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.customer.mapper.CustomerOrderMapper;
 import com.ruoyi.customer.domain.CustomerOrder;
 import com.ruoyi.customer.service.ICustomerOrderService;
-// import com.ruoyi.system.utils.OrderNumberGenerator;
 
 /**
  * 订单管理Service业务层处理
@@ -20,7 +19,7 @@ import com.ruoyi.customer.service.ICustomerOrderService;
 public class CustomerOrderServiceImpl implements ICustomerOrderService 
 {
     @Autowired
-    private CustomerOrderMapper sysOrderMapper;
+    private CustomerOrderMapper customerOrderMapper;
 
     /**
      * 查询订单管理
@@ -31,7 +30,7 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
     @Override
     public CustomerOrder selectSysOrderById(Long id)
     {
-        return sysOrderMapper.selectSysOrderById(id);
+        return customerOrderMapper.selectSysOrderById(id);
     }
 
     /**
@@ -43,7 +42,8 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
     @Override
     public List<CustomerOrder> selectSysOrderList(CustomerOrder sysOrder)
     {
-        return sysOrderMapper.selectSysOrderList(sysOrder);
+        // String user = UserContextHolder.get();
+        return customerOrderMapper.selectSysOrderList(sysOrder);
     }
 
     /**
@@ -59,7 +59,7 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
         sysOrder.setCreateTime(DateUtils.getNowDate());
         sysOrder.setPayState(1);
         sysOrder.setRefundAmount(BigDecimal.valueOf(0.0));
-        return sysOrderMapper.insertSysOrder(sysOrder);
+        return customerOrderMapper.insertSysOrder(sysOrder);
     }
 
     /**
@@ -71,7 +71,7 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
     @Override
     public int updateSysOrder(CustomerOrder sysOrder)
     {
-        return sysOrderMapper.updateSysOrder(sysOrder);
+        return customerOrderMapper.updateSysOrder(sysOrder);
     }
 
     /**
@@ -83,7 +83,7 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
     @Override
     public int deleteSysOrderByIds(Long[] ids)
     {
-        return sysOrderMapper.deleteSysOrderByIds(ids);
+        return customerOrderMapper.deleteSysOrderByIds(ids);
     }
 
     /**
@@ -95,6 +95,6 @@ public class CustomerOrderServiceImpl implements ICustomerOrderService
     @Override
     public int deleteSysOrderById(Long id)
     {
-        return sysOrderMapper.deleteSysOrderById(id);
+        return customerOrderMapper.deleteSysOrderById(id);
     }
 }

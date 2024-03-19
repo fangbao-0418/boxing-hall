@@ -9,6 +9,13 @@
       "name": "Launch RuoYiApplication",
       "request": "launch",
       "mainClass": "com.ruoyi.RuoYiApplication",
+      "projectName": "ruoyi-test"
+    },
+    {
+      "type": "java",
+      "name": "Launch RuoYiApplication",
+      "request": "launch",
+      "mainClass": "com.ruoyi.RuoYiApplication",
       "projectName": "ruoyi-customer"
     },
     {

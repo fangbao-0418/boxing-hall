@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.customer.mapper.CustomerKnowledgeMapper">
+    
+    <resultMap type="SysKnowledge" id="SysKnowledgeResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="thumb"    column="thumb"    />
+        <result property="content"    column="content"    />
+        <result property="updateTime"    column="updateTime"    />
+        <result property="weight"    column="weight"    />
+    </resultMap>
+
+    <sql id="selectSysKnowledgeVo">
+        select id, title, thumb, content, updateTime, weight from sys_knowledge
+    </sql>
+
+    <select id="selectSysKnowledgeList" parameterType="SysKnowledge" resultMap="SysKnowledgeResult">
+        <include refid="selectSysKnowledgeVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="thumb != null  and thumb != ''"> and thumb = #{thumb}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysKnowledgeById" parameterType="Long" resultMap="SysKnowledgeResult">
+        <include refid="selectSysKnowledgeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysKnowledge" parameterType="SysKnowledge" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_knowledge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="thumb != null and thumb != ''">thumb,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="updateTime != null">updateTime,</if>
+            <if test="weight != null">weight,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="thumb != null and thumb != ''">#{thumb},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="weight != null">#{weight},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysKnowledge" parameterType="SysKnowledge">
+        update sys_knowledge
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="thumb != null and thumb != ''">thumb = #{thumb},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
+            <if test="weight != null">weight = #{weight},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysKnowledgeById" parameterType="Long">
+        delete from sys_knowledge where id = #{id}
+    </delete>
+
+    <delete id="deleteSysKnowledgeByIds" parameterType="String">
+        delete from sys_knowledge where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
